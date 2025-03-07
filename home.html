@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coder.com - Make everyone a Coder</title>
+  <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #1e1e1e;
+      --text-primary: #e0e0e0;
+      --text-secondary: #a0a0a0;
+      --accent: #4f5cd1;
+      --accent-hover: #6169d0;
+      --card-bg: #2d2d2d;
+      --border-color: #3d3d3d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(to bottom right, #000000 40%, var(--accent) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .burger-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 101;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .burger-line {
+      width: 24px;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+    
+    .burger-menu:hover .burger-line {
+      background-color: var(--accent);
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 320px;
+      height: 100vh;
+      background-color: var(--bg-secondary);
+      z-index: 100;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .mobile-menu.active {
+      right: 0;
+    }
+    
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .close-menu {
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: color 0.3s ease;
+    }
+    
+    .close-menu:hover {
+      color: var(--accent);
+    }
+    
+    .menu-content {
+      padding: 1.5rem;
+    }
+    
+    .menu-section {
+      margin-bottom: 2rem;
+    }
+    
+    .menu-section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: color 0.3s ease;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .menu-section-title:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    
+    .menu-list {
+      list-style: none;
+      padding-left: 0.5rem;
+    }
+    
+    .menu-list li {
+      margin-bottom: 0.4rem;
+    }
+    
+    .menu-list a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+      display: block;
+      padding: 0.2rem 0;
+    }
+    
+    .menu-list a:hover {
+      color: var(--accent);
+    }
+    
+    main {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .chat-container {
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+    
+    h1.tagline {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    
+    .chat-input-container {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    
+    .chat-input {
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    
+    .chat-input:focus {
+      border-color: var(--accent);
+    }
+    
+    .chat-submit {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .chat-submit:hover {
+      background-color: var(--accent-hover);
+    }
+    
+    .cta-header {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .cta-header h2 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .cta-section {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    
+    .cta-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      width: 240px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .cta-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .cta-button {
+      width: 100%;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      background-color: var(--card-bg);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .cta-button:hover {
+      background-color: rgba(92, 107, 192, 0.1);
+    }
+    
+    .persona {
+      padding: 1.5rem 1rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .persona-icon {
+      width: 60px;
+      height: 60px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+      order: 3;
+    }
+    
+    .persona-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      order: 1;
+    }
+    
+    .persona-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+      order: 2;
+    }
+    
+    @media (max-width: 768px) {
+      .cta-section {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-card {
+        width: 100%;
+        max-width: 320px;
+      }
+      
+      h1.tagline, h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo.png" alt="Coder Logo" class="logo-image" style="max-width: 150px; height: auto;">
+    </div>
+    <div class="burger-menu" id="burgerMenu">
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+      <div class="burger-line"></div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="menu-header">
+        <img src="logo.png" alt="Coder Logo" class="logo-image" style="max-width: 150px; height: auto;">
+        <div class="close-menu" id="closeMenu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+      </div>
+      <div class="menu-content">
+        <div class="menu-section">
+          <a href="#" class="menu-section-title">Product</a>
+          <ul class="menu-list">
+            <li><a href="#">Coder Prototyper</a></li>
+            <li><a href="#">Coder Workspaces</a></li>
+            <li><a href="#">Coder AI Workspaces</a></li>
+          </ul>
+        </div>
+        
+        <div class="menu-section">
+          <a href="#" class="menu-section-title">Open Source</a>
+          <ul class="menu-list">
+            <li><a href="#">coder</a></li>
+            <li><a href="#">code-server</a></li>
+            <li><a href="#">weno</a></li>
+          </ul>
+        </div>
+        
+        <div class="menu-section">
+          <a href="#" class="menu-section-title">Docs</a>
+        </div>
+        
+        <div class="menu-section">
+          <a href="#" class="menu-section-title">Pricing</a>
+        </div>
+        
+        <div class="menu-section">
+          <a href="#" class="menu-section-title">Resources</a>
+        </div>
+        
+        <div class="menu-section">
+          <a href="#" class="menu-section-title">Company</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <main>
+    <div class="chat-container">
+      <h1 class="tagline">Make everyone a Coder</h1>
+      <h2>Let's code something.</h2>
+      
+      <div class="chat-input-container">
+        <input type="text" class="chat-input" placeholder="Describe what you're trying to code...">
+        <button class="chat-submit">Code Now</button>
+      </div>
+      
+      <div class="cta-header">
+        <h2>Don't know how to get started?</h2>
+      </div>
+      
+      <div class="cta-section">
+        <div class="cta-card">
+          <div class="persona">
+            <div class="persona-title">Knowledge Workers:</div>
+            <div class="persona-desc">Create working prototypes without writing code</div>
+            <div class="persona-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+          </div>
+          <button class="cta-button">Prototype an app</button>
+        </div>
+        
+        <div class="cta-card">
+          <div class="persona">
+            <div class="persona-title">Developers:</div>
+            <div class="persona-desc">Edit existing code securely from anywhere</div>
+            <div class="persona-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+          </div>
+          <button class="cta-button">Edit code faster</button>
+        </div>
+        
+        <div class="cta-card">
+          <div class="persona">
+            <div class="persona-title">Data Scientists:</div>
+            <div class="persona-desc">Streamline Machine Learning operations (MLOps)</div>
+            <div class="persona-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0 1.2-4 6-9 6s-9-4.8-9-6c0-1.2 4-6 9-6s9 4.8 9 6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </div>
+          </div>
+          <button class="cta-button">Train AI/ML models</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const burgerMenu = document.getElementById('burgerMenu');
+      const closeMenu = document.getElementById('closeMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      burgerMenu.addEventListener('click', function() {
+        mobileMenu.classList.add('active');
+        burgerMenu.style.opacity = '0';
+        burgerMenu.style.visibility = 'hidden';
+      });
+      
+      closeMenu.addEventListener('click', function() {
+        mobileMenu.classList.remove('active');
+        setTimeout(function() {
+          burgerMenu.style.opacity = '1';
+          burgerMenu.style.visibility = 'visible';
+        }, 300); // Match this to the transition time of the menu
+      });
+    });
+  </script>
+</body>
+</html>
