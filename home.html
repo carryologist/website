@@ -187,6 +187,8 @@
       font-weight: 500;
       color: var(--text-secondary);
       max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .chat-input-container {
@@ -277,18 +279,19 @@
       width: 100%;
       padding: 1.25rem 1rem;
       text-align: center;
-      background-color: var(--card-bg);
+      background-color: transparent;
       color: var(--accent);
       font-weight: 600;
       font-size: 1rem;
-      border: none;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s;
-      border-top: 1px solid var(--border-color);
+      margin: 1rem;
     }
     
     .cta-button:hover {
-      background-color: rgba(67, 83, 255, 0.05);
+      background-color: rgba(67, 83, 255, 0.1);
     }
     
     .persona {
@@ -354,6 +357,90 @@
         padding: 0 1rem;
       }
     }
+  
+  /* New section for Agentic AI values */
+  .values-section {
+    width: 100%;
+    padding: 5rem 1.5rem;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 3rem;
+  }
+  
+  .values-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .values-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .values-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+  
+  .values-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .value-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+  }
+  
+  .value-icon {
+    width: 56px;
+    height: 56px;
+    background-color: var(--accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 12px rgba(67, 83, 255, 0.15);
+  }
+  
+  .value-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+  
+  .value-desc {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .values-header h2 {
+      font-size: 1.8rem;
+    }
+  }
   </style>
 </head>
 <body>
@@ -413,7 +500,7 @@
   
   <main>
     <div class="chat-container">
-      <h1 class="tagline">Agentic AI Meets Coder</h1>
+      <h1 class="tagline">Unleash Agentic AI In Your Enterprise</h1>
       <h2>Secure Development Environments for AI and Humans</h2>
       
       <div class="chat-input-container">
@@ -429,7 +516,7 @@
         <div class="cta-card">
           <div class="persona">
             <div class="persona-title">Knowledge Workers:</div>
-            <div class="persona-desc">Create working prototypes without writing code</div>
+            <div class="persona-desc">Use coding agents to build apps without writing code</div>
             <div class="persona-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             </div>
@@ -461,6 +548,41 @@
       </div>
     </div>
   </main>
+  
+  <section class="values-section">
+    <div class="values-container">
+      <div class="values-header">
+        <h2>Why Coder Workspaces Are Perfect for Agentic AI</h2>
+        <p>Enterprise AI that's secure, governed, and scalable.</p>
+      </div>
+      
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg>
+          </div>
+          <h3 class="value-title">Essential Guardrails</h3>
+          <p class="value-desc">Ensure AI doesn't create chaos. Role-based access controls govern exactly what a workspace (and AI agent) can access. Secrets management prevents credential leaks, while resource quotas prevent runaway usage.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+          </div>
+          <h3 class="value-title">Right-Sized Infrastructure</h3>
+          <p class="value-desc">Provision secure, consistent environments for AI agents instantly. Tailor infrastructure to task requirements with infrastructure-as-code, controlling resources as AI models and usage patterns evolve.</p>
+        </div>
+        
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v-2"></path><path d="M12 10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3m2 0a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h3Z"></path><path d="M17 6v12"></path><path d="M7 18h11"></path><path d="M7 6h2"></path><path d="M19 6h2"></path><path d="M19 18h-2"></path></svg>
+          </div>
+          <h3 class="value-title">Fully Isolated Workspaces</h3>
+          <p class="value-desc">Give AI a sandbox to work in - real environments with the right tools, but isolated so if they break something, it doesn't affect production. Workspaces can be rebuilt in minutes for safe experimentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
